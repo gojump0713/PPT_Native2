@@ -64,14 +64,12 @@ PC 전용(Desktop-Only) HTML 기반 인터랙티브 발표 슬라이드입니다
 
 ## Hero 배경영상
 
-현재는 포스터 + Animated Gradient 폴백으로 동작합니다. 영상을 적용하려면:
+Kling v3.0 Pro로 생성한 12초 1080p MP4(`assets/videos/university-success-hero.mp4`)가
+적용되어 있습니다. 재생 실패 시 Poster(영상 첫 프레임) + Animated Gradient로 자동 폴백됩니다.
 
-1. `assets/videos/university-success-hero.webm` (권장) 및 `.mp4` 파일 배치
-   - 12~15초 Seamless Loop, 1080p 이상, 무음
-   - 생성 프롬프트는 `DECISIONS.md` 참고 (UI 기능명세서 3.3 AI VIDEO PROMPT)
-2. `js/config.js` 에서 `heroVideo.enabled: true` 로 변경
-
-영상 재생 실패 시 WebM → MP4 → Poster + Gradient 순으로 자동 폴백됩니다.
+- **영상 교체**: 같은 파일명으로 MP4를 덮어쓴 뒤 `cd tools && node poster.mjs`로 포스터 재생성
+- **WebM 추가(선택)**: 파일 배치 후 `js/config.js`의 `heroVideo.webm` 경로 지정 (WebM 우선 재생)
+- 생성 프롬프트는 `DECISIONS.md` D-04 참고 (UI 기능명세서 3.3 AI VIDEO PROMPT)
 
 ## 발표 전 체크리스트
 
