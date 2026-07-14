@@ -1,0 +1,121 @@
+/* ==========================================================================
+   overview.css — Overview Mode (5열 × 2행 카드 그리드)
+   ========================================================================== */
+
+#overview {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(3, 6, 12, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+
+#overview.open { opacity: 1; }
+#overview[hidden] { display: none; }
+
+#overview-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 336px);
+  grid-template-rows: repeat(2, auto);
+  gap: 36px 28px;
+  padding: 40px;
+}
+
+.ov-card {
+  position: relative;
+  width: 336px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: rgba(8, 14, 24, 0.85);
+  padding: 0;
+  cursor: pointer;
+  overflow: visible;
+  transition: transform var(--motion-fast) var(--ease-out),
+              border-color var(--motion-fast),
+              box-shadow var(--motion-fast);
+  font-family: var(--font-body);
+  text-align: left;
+  color: var(--color-text);
+}
+
+.ov-card:hover,
+.ov-card:focus-visible {
+  transform: scale(1.07);
+  border-color: rgba(20, 201, 140, 0.6);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+
+.ov-card:focus-visible {
+  outline: 3px solid var(--tilon-green);
+  outline-offset: 3px;
+}
+
+.ov-card.current {
+  border: 3px solid var(--tilon-green);
+  box-shadow: 0 0 28px var(--tilon-green-glow);
+}
+
+.ov-card.current::after {
+  content: "CURRENT";
+  position: absolute;
+  top: -14px;
+  right: 12px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--tilon-green);
+  color: #04211a;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.ov-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 13px 13px 0 0;
+  background: var(--color-stage-bg);
+  user-select: none;
+  pointer-events: none;
+}
+
+.ov-card.current .ov-thumb { border-radius: 10px 10px 0 0; }
+
+.ov-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.ov-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--tilon-green);
+  letter-spacing: 0.05em;
+}
+
+.ov-info { min-width: 0; }
+
+.ov-group {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ov-title {
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

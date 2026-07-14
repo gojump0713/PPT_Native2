@@ -1,0 +1,40 @@
+/* ==========================================================================
+   tokens.css — 디자인 토큰 (1920×1080 논리 좌표계 고정 px 기준)
+   ========================================================================== */
+:root {
+  /* Color */
+  --color-bg: #000000;              /* 레터박스 여백 */
+  --color-stage-bg: #050810;        /* Dark Navy — 이미지 슬라이드 여백 */
+  --color-navy-deep: #04070f;
+  --color-surface: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.18);
+  --color-text: #ffffff;
+  --color-muted: rgba(255, 255, 255, 0.66);
+
+  --tilon-green: #14c98c;           /* TILON Green Accent */
+  --tilon-green-glow: rgba(20, 201, 140, 0.45);
+  --color-cyan: #38d5f5;
+
+  /* Glass UI */
+  --glass-bg: rgba(5, 16, 24, 0.62);
+  --glass-blur: 20px;
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-radius: 24px;
+
+  /* Typography — Pretendard 미설치 환경 폴백 포함 */
+  --font-display: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  --font-body: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-fast: 0.3s;
+  --motion-normal: 0.65s;
+  --motion-slow: 1s;
+
+  /* Layer (z-index) */
+  --z-slides: 10;        /* Layer 1~2 */
+  --z-transition: 30;    /* Layer 3 */
+  --z-chrome: 40;        /* Layer 4 */
+  --z-overlay: 50;       /* Layer 5 */
+}

@@ -1,0 +1,209 @@
+/* ==========================================================================
+   layout.css — 고정 스테이지(1920×1080) 레터박스 스케일링 + 공통 UI
+   반응형 아님: 브레이크포인트·리플로우 없음 (PC 전용)
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-text);
+}
+
+/* --- 레터박스 + 스테이지 --- */
+#letterbox {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+#stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
+  background: var(--color-stage-bg);
+  overflow: hidden;
+}
+
+#slides {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-slides);
+}
+
+/* Overview 오픈 시 배경 슬라이드 Blur + Dim */
+#slides.dimmed {
+  filter: blur(16px) brightness(0.45);
+  transition: filter var(--motion-fast) var(--ease-out);
+}
+
+/* --- 상단 메뉴 (Layer 4) --- */
+#chrome-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 96px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: var(--z-chrome);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+
+#chrome-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chrome-logo {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--color-text);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.chrome-controls {
+  display: flex;
+  gap: 14px;
+}
+
+.chrome-controls button {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: rgba(5, 16, 24, 0.55);
+  backdrop-filter: blur(12px);
+  color: var(--color-text);
+  font-size: 22px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background var(--motion-fast), border-color var(--motion-fast), transform var(--motion-fast);
+}
+
+.chrome-controls button:hover {
+  background: rgba(20, 201, 140, 0.18);
+  border-color: var(--tilon-green);
+  transform: translateY(-2px);
+}
+
+.chrome-controls button:focus-visible {
+  outline: 2px solid var(--tilon-green);
+  outline-offset: 2px;
+}
+
+/* --- 페이지 번호 --- */
+#page-indicator {
+  position: absolute;
+  right: 40px;
+  bottom: 28px;
+  z-index: var(--z-chrome);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  user-select: none;
+  transition: opacity var(--motion-fast);
+}
+
+#page-indicator.hidden { opacity: 0; }
+
+/* --- 진행률 바 (3px 이하) --- */
+#progress-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.10);
+  z-index: var(--z-chrome);
+}
+
+#progress-fill {
+  display: block;
+  width: 10%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--tilon-green), var(--color-cyan));
+  transition: width 0.5s var(--ease-out);
+}
+
+/* --- 숫자 점프 표시 --- */
+#jump-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  z-index: var(--z-chrome);
+  padding: 12px 28px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* --- 블랙아웃 --- */
+#blackout {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: calc(var(--z-overlay) + 5);
+}
+
+/* --- env-gate (모바일/협소 뷰포트 안내 — 정적 1페이지) --- */
+#env-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-navy-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+#env-gate[hidden] { display: none; }
+
+.env-gate-logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--tilon-green);
+  margin-bottom: 28px;
+}
+
+#env-gate h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.env-gate-sub {
+  font-size: 16px;
+  color: var(--color-muted);
+}
+
+/* --- 포커스 링 공통 --- */
+button:focus-visible {
+  outline: 2px solid var(--tilon-green);
+  outline-offset: 2px;
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>국내 대학 성공 사례 | TILON University Success Cases</title>
+  <meta name="description" content="틸론 국내 대학 구축 성공사례 - AI·VDI 기반 미래교육 인프라 구축 레퍼런스 (PC 전용 발표 슬라이드)">
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/slides.css">
+  <link rel="stylesheet" href="./css/overview.css">
+  <link rel="stylesheet" href="./css/transitions.css">
+</head>
+<body>
+
+  <!-- 모바일/협소 뷰포트 접근 안내 (env-gate) -->
+  <div id="env-gate" hidden>
+    <div class="env-gate-inner">
+      <p class="env-gate-logo">TILON</p>
+      <h1>본 발표 자료는 PC 환경(Chrome/Edge)에<br>최적화되어 있습니다</h1>
+      <p class="env-gate-sub">데스크톱 또는 노트북 PC의 가로 1024px 이상 화면에서 열어 주세요.</p>
+    </div>
+  </div>
+
+  <div id="letterbox">
+    <div id="stage">
+
+      <div id="slides">
+
+        <!-- 01 · Hero -->
+        <section class="slide hero-slide active" id="slide-opening" data-slide="01"
+                 data-title="국내 대학 성공 사례" data-group="Opening">
+          <div class="hero-bg-fallback">
+            <img src="./assets/images/university-success-poster.webp" alt="" draggable="false">
+          </div>
+          <div class="hero-video-holder" id="hero-video-holder"></div>
+          <div class="hero-dim"></div>
+          <div class="hero-content">
+            <p class="hero-logo">TILON</p>
+            <h1 class="hero-title">
+              <span class="hero-title-line"><span>국내 대학</span></span>
+              <span class="hero-title-line"><span>성공 사례</span></span>
+            </h1>
+            <p class="hero-sub">AI·VDI 기반 미래교육 인프라 구축 레퍼런스</p>
+          </div>
+        </section>
+
+        <!-- 02~10 · Source 이미지 전용 -->
+        <section class="slide image-slide" id="slide-sogang-01" data-slide="02"
+                 data-title="서강대학교 도입 성공사례" data-group="서강대학교">
+          <img src="./assets/source/slide-02.webp" alt="서강대학교 도입 성공사례" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-sogang-02" data-slide="03"
+                 data-title="서강대학교 AI+VDI 교육·행정 환경" data-group="서강대학교">
+          <img src="./assets/source/slide-03.webp" alt="서강대학교 AI+VDI 교육·행정 환경" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-jeju-01" data-slide="04"
+                 data-title="제주대학교 3A 학습환경" data-group="제주대학교">
+          <img src="./assets/source/slide-04.webp" alt="제주대학교 3A 학습환경" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-jeju-02" data-slide="05"
+                 data-title="제주대학교 공용 VDI" data-group="제주대학교">
+          <img src="./assets/source/slide-05.webp" alt="제주대학교 공용 VDI" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-donga-01" data-slide="06"
+                 data-title="동아대학교 현황" data-group="동아대학교">
+          <img src="./assets/source/slide-06.webp" alt="동아대학교 현황" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-donga-02" data-slide="07"
+                 data-title="동아대학교 ISMS-P·VDI" data-group="동아대학교">
+          <img src="./assets/source/slide-07.webp" alt="동아대학교 ISMS-P·VDI" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-baekseok-01" data-slide="08"
+                 data-title="백석대학교 AX 실무인재 양성 플랫폼" data-group="백석대학교">
+          <img src="./assets/source/slide-08.webp" alt="백석대학교 AX 실무인재 양성 플랫폼" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-sangmyung-01" data-slide="09"
+                 data-title="상명대학교 AI·SW 학습환경" data-group="상명대학교">
+          <img src="./assets/source/slide-09.webp" alt="상명대학교 AI·SW 학습환경" draggable="false">
+        </section>
+
+        <section class="slide image-slide" id="slide-kcu-01" data-slide="10"
+                 data-title="고려사이버대학교 Virtual Lab" data-group="고려사이버대학교">
+          <img src="./assets/source/slide-10.webp" alt="고려사이버대학교 Virtual Lab" draggable="false">
+        </section>
+
+      </div>
+
+      <!-- 상단 메뉴 (Layer 4) -->
+      <header id="chrome-top">
+        <p class="chrome-logo">TILON</p>
+        <nav class="chrome-controls">
+          <button type="button" id="btn-help" title="조작 도움말 (H)" aria-label="조작 도움말">?</button>
+          <button type="button" id="btn-overview" title="전체 페이지 (O)" aria-label="전체 페이지">▦</button>
+          <button type="button" id="btn-fullscreen" title="전체 화면 (F)" aria-label="전체 화면">⛶</button>
+        </nav>
+      </header>
+
+      <!-- 진행 표시 (Layer 4) -->
+      <div id="page-indicator" aria-live="polite">01 / 10</div>
+      <div id="progress-bar"><i id="progress-fill"></i></div>
+      <div id="jump-indicator" hidden></div>
+
+      <!-- 조작 안내 Glass UI (Layer 5) -->
+      <div id="guide-panel" class="guide-hidden" role="dialog" aria-label="발표 화면 조작 방법">
+        <p class="guide-header">발표 화면 조작 방법</p>
+        <div class="guide-grid">
+          <div class="guide-item">
+            <p class="guide-keys"><kbd>←</kbd><kbd>→</kbd></p>
+            <p class="guide-desc">이전 · 다음 페이지</p>
+          </div>
+          <div class="guide-item">
+            <p class="guide-keys"><span class="guide-icon">⟳</span> Mouse Wheel</p>
+            <p class="guide-desc">페이지 이동</p>
+          </div>
+          <div class="guide-item">
+            <p class="guide-keys"><kbd>O</kbd> 또는 ▦ / <kbd>F</kbd></p>
+            <p class="guide-desc">전체 페이지 / 전체 화면</p>
+          </div>
+        </div>
+        <div class="guide-actions">
+          <button type="button" id="btn-guide-overview">전체 사례 보기</button>
+          <button type="button" id="btn-guide-start" class="primary">발표 시작</button>
+        </div>
+      </div>
+
+      <!-- Overview Mode (Layer 5) -->
+      <div id="overview" hidden role="dialog" aria-label="전체 페이지 보기">
+        <div id="overview-grid"></div>
+      </div>
+
+      <!-- 블랙아웃 (Layer 5) -->
+      <div id="blackout" hidden></div>
+
+    </div>
+  </div>
+
+  <noscript>
+    <style>
+      #letterbox, #stage { position: static; width: auto; height: auto; transform: none; }
+      #slides .slide { position: static; visibility: visible; width: auto; height: auto; }
+      #chrome-top, #guide-panel, #progress-bar, #page-indicator { display: none; }
+    </style>
+  </noscript>
+
+  <script src="./js/config.js"></script>
+  <script src="./js/content.js"></script>
+  <script src="./js/env-gate.js"></script>
+  <script src="./js/transitions.js"></script>
+  <script src="./js/navigation.js"></script>
+  <script src="./js/overview.js"></script>
+  <script src="./js/help.js"></script>
+  <script src="./js/performance.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

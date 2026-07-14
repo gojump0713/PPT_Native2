@@ -1,0 +1,288 @@
+/* ==========================================================================
+   slides.css — 슬라이드 공통 + Hero(슬라이드 1) + 이미지 전용(슬라이드 2~10)
+   ========================================================================== */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  background: var(--color-stage-bg);
+  visibility: hidden;
+}
+
+.slide.active { visibility: visible; }
+
+/* --- 이미지 전용 슬라이드 (2~10): 원본 1장 + 정지 상태 --- */
+.image-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Hero (슬라이드 1)
+   ========================================================================== */
+
+.hero-slide { overflow: hidden; }
+
+/* Layer 1 — 폴백 배경: Poster + Animated Gradient */
+.hero-bg-fallback {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg-fallback img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-bg-fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+    rgba(20, 201, 140, 0.00) 20%,
+    rgba(20, 201, 140, 0.10) 45%,
+    rgba(56, 213, 245, 0.08) 60%,
+    rgba(20, 201, 140, 0.00) 80%);
+  background-size: 260% 260%;
+  animation: heroGradientDrift 14s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes heroGradientDrift {
+  from { background-position: 0% 100%; }
+  to   { background-position: 100% 0%; }
+}
+
+/* Layer 1 — 배경영상 (성공적으로 재생될 때만 노출) */
+.hero-video-holder video {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+}
+
+.hero-video-holder video.playing { opacity: 1; }
+
+/* 가독성 확보용 딤 레이어 */
+.hero-dim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 7, 15, 0.72) 0%, rgba(4, 7, 15, 0.35) 55%, rgba(4, 7, 15, 0.15) 100%),
+    linear-gradient(0deg, rgba(4, 7, 15, 0.55) 0%, rgba(4, 7, 15, 0.05) 40%);
+}
+
+/* --- Hero 콘텐츠: 좌측 중심 X 180 / Y 330 --- */
+.hero-content {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-logo {
+  position: absolute;
+  top: 34px;
+  left: 48px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--color-text);
+  user-select: none;
+  opacity: 0;
+}
+
+.hero-title {
+  position: absolute;
+  left: 180px;
+  top: 330px;
+  font-family: var(--font-display);
+  font-size: 112px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.hero-title-line {
+  display: block;
+  overflow: hidden;             /* Mask Reveal */
+}
+
+.hero-title-line > span {
+  display: block;
+  transform: translateY(110%);
+}
+
+.hero-sub {
+  position: absolute;
+  left: 184px;
+  top: 636px;
+  font-size: 38px;
+  font-weight: 500;
+  color: var(--color-muted);
+  letter-spacing: 0.01em;
+  opacity: 0;
+}
+
+.hero-sub strong { color: var(--tilon-green); font-weight: 600; }
+
+/* --- Hero 진입 모션 (0.0s Poster → 0.3s 로고 → 0.6s 타이틀 → 0.9s 서브) --- */
+.hero-slide.hero-enter .hero-logo {
+  animation: heroLogoIn 0.7s var(--ease-out) 0.3s forwards;
+}
+
+.hero-slide.hero-enter .hero-title-line > span {
+  animation: heroTitleReveal 0.9s var(--ease-out) forwards;
+}
+
+.hero-slide.hero-enter .hero-title-line:nth-child(1) > span { animation-delay: 0.6s; }
+.hero-slide.hero-enter .hero-title-line:nth-child(2) > span { animation-delay: 0.75s; }
+
+.hero-slide.hero-enter .hero-sub {
+  animation: heroFadeIn 0.8s var(--ease-out) 0.9s forwards;
+}
+
+@keyframes heroLogoIn {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroTitleReveal {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ==========================================================================
+   조작 안내 Glass UI — 1540×230, 하단 중앙
+   ========================================================================== */
+
+#guide-panel {
+  position: absolute;
+  left: 190px;
+  bottom: 60px;
+  width: 1540px;
+  height: 230px;
+  padding: 28px 48px;
+  border-radius: var(--glass-radius);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+#guide-panel.guide-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
+}
+
+.guide-header {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.guide-grid {
+  display: flex;
+  gap: 56px;
+  align-items: center;
+}
+
+.guide-item { flex: 1; }
+
+.guide-keys {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--tilon-green);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-keys kbd {
+  display: inline-block;
+  min-width: 40px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-body);
+  font-size: 20px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.guide-icon { font-size: 22px; }
+
+.guide-desc {
+  font-size: 20px;
+  color: var(--color-muted);
+}
+
+.guide-actions {
+  position: absolute;
+  right: 48px;
+  top: 28px;
+  display: flex;
+  gap: 14px;
+}
+
+.guide-actions button {
+  height: 54px;
+  padding: 0 30px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 21px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--motion-fast), border-color var(--motion-fast), transform var(--motion-fast);
+}
+
+.guide-actions button:hover {
+  border-color: var(--tilon-green);
+  background: rgba(20, 201, 140, 0.16);
+  transform: translateY(-2px);
+}
+
+.guide-actions button.primary {
+  background: var(--tilon-green);
+  border-color: var(--tilon-green);
+  color: #04211a;
+}
+
+.guide-actions button.primary:hover {
+  background: #19e09d;
+  box-shadow: 0 6px 24px var(--tilon-green-glow);
+}

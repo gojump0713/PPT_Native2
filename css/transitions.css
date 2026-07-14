@@ -1,0 +1,111 @@
+/* ==========================================================================
+   transitions.css — 화면전환 (JS가 클래스를 부여, CSS가 모션 정의)
+   전환 완료 후 JS가 클래스를 제거하여 opacity:1 / filter:none / transform:none 보장
+   ========================================================================== */
+
+/* 전환 중인 슬라이드는 둘 다 표시 */
+.slide.t-from,
+.slide.t-to {
+  visibility: visible;
+  will-change: transform, opacity, filter, clip-path;
+}
+
+.slide.t-from { z-index: 1; }
+.slide.t-to   { z-index: 2; }
+
+/* --------------------------------------------------------------------------
+   Cinematic Fade — Hero 연결 구간 (1→2: 1.0s / 9→10: 0.9s)
+   -------------------------------------------------------------------------- */
+.t-cinematic.t-from {
+  transition: opacity var(--t-dur) var(--ease-in-out), filter var(--t-dur) var(--ease-in-out);
+}
+.t-cinematic.t-from.t-run { opacity: 0; filter: brightness(0.7); }
+
+.t-cinematic.t-to {
+  opacity: 0;
+  transition: opacity var(--t-dur) var(--ease-in-out);
+}
+.t-cinematic.t-to.t-run { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   Depth Blur Crossfade — 동일 대학 내 연결 (0.8s)
+   -------------------------------------------------------------------------- */
+.t-depth.t-from {
+  transition: opacity var(--t-dur) var(--ease-in-out),
+              transform var(--t-dur) var(--ease-in-out),
+              filter var(--t-dur) var(--ease-in-out);
+}
+.t-depth.t-from.t-run { opacity: 0; transform: scale(1.015); filter: blur(8px); }
+
+.t-depth.t-to {
+  opacity: 0;
+  transform: scale(0.985);
+  filter: blur(8px);
+  transition: opacity var(--t-dur) var(--ease-in-out),
+              transform var(--t-dur) var(--ease-in-out),
+              filter var(--t-dur) var(--ease-in-out);
+}
+.t-depth.t-to.t-run { opacity: 1; transform: scale(1); filter: blur(0px); }
+
+/* --------------------------------------------------------------------------
+   Horizontal Slide — 대학 변경 구간 (0.75s), 이전 이동 시 방향 반전
+   -------------------------------------------------------------------------- */
+.t-hslide.t-from { transition: transform var(--t-dur) var(--ease-in-out); }
+.t-hslide.t-to   { transition: transform var(--t-dur) var(--ease-in-out); }
+
+/* forward */
+.t-hslide.t-fwd.t-from.t-run { transform: translateX(-1920px); }
+.t-hslide.t-fwd.t-to         { transform: translateX(1920px); }
+.t-hslide.t-fwd.t-to.t-run   { transform: translateX(0); }
+
+/* backward */
+.t-hslide.t-back.t-from.t-run { transform: translateX(1920px); }
+.t-hslide.t-back.t-to         { transform: translateX(-1920px); }
+.t-hslide.t-back.t-to.t-run   { transform: translateX(0); }
+
+/* --------------------------------------------------------------------------
+   Soft Crossfade — 부드러운 사례 연결 (0.65s)
+   -------------------------------------------------------------------------- */
+.t-soft.t-from { transition: opacity var(--t-dur) var(--ease-in-out); }
+.t-soft.t-from.t-run { opacity: 0; }
+
+.t-soft.t-to {
+  opacity: 0;
+  transition: opacity var(--t-dur) var(--ease-in-out);
+}
+.t-soft.t-to.t-run { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   Page Wipe — 장면 경계 강조 (0.85s), 기존 이미지 유지 후 새 화면이 덮음
+   -------------------------------------------------------------------------- */
+.t-wipe.t-from { /* 아래 레이어에서 유지 */ }
+
+.t-wipe.t-to { transition: clip-path var(--t-dur) var(--ease-in-out); }
+
+/* forward: 왼쪽→오른쪽 Reveal */
+.t-wipe.t-fwd.t-to       { clip-path: inset(0 100% 0 0); }
+.t-wipe.t-fwd.t-to.t-run { clip-path: inset(0 0 0 0); }
+
+/* backward: 오른쪽→왼쪽 Reveal */
+.t-wipe.t-back.t-to       { clip-path: inset(0 0 0 100%); }
+.t-wipe.t-back.t-to.t-run { clip-path: inset(0 0 0 0); }
+
+/* --------------------------------------------------------------------------
+   prefers-reduced-motion: 모든 전환을 0.25s Crossfade로 축소
+   (JS에서도 감지하여 soft 타입으로 강제 — CSS는 이중 안전장치)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .slide.t-from, .slide.t-to {
+    transition-duration: 0.25s !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
+  .hero-slide.hero-enter .hero-logo,
+  .hero-slide.hero-enter .hero-title-line > span,
+  .hero-slide.hero-enter .hero-sub {
+    animation-duration: 0.25s !important;
+    animation-delay: 0s !important;
+  }
+  .hero-bg-fallback::after { animation: none !important; }
+}
