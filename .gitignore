@@ -1,0 +1,13 @@
+# PowerPoint 임시 잠금 파일
+~$*.pptx
+
+# 빌드 도구
+tools/node_modules/
+
+# 중간 산출물 (PPT 재추출 PNG — convert.mjs 입력)
+assets/source_png/
+
+# OS
+Thumbs.db
+.DS_Store
+tools/qa-shots/
