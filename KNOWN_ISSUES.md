@@ -1,9 +1,9 @@
 # KNOWN_ISSUES
 
-## K-01. Hero 배경영상 에셋 미포함
-- **상태**: 폴백(포스터 + Animated Gradient)으로 정상 동작. 기능 결함 아님.
-- **내용**: `assets/videos/university-success-hero.webm/.mp4`는 AI 영상 생성이 필요한 외부 산출물로 아직 리포지토리에 없다.
-- **해결 방법**: README "Hero 배경영상 추가" 절차대로 파일 배치 후 `js/config.js`의 `heroVideo.enabled=true`.
+## K-01. Hero 배경영상 — MP4만 포함 (WebM 미포함) [해결됨]
+- **상태**: Kling v3.0 Pro로 생성한 12초 1080p MP4(H.264) 적용 완료. 포스터도 영상 첫 프레임으로 교체되어 페이드인이 자연스럽다.
+- **잔여 사항**: 스펙이 권장하는 WebM 1순위 소스는 로컬에 트랜스코더(ffmpeg)가 없어 미생성. Chrome/Edge는 H.264 MP4를 완전 지원하므로 발표 품질에 영향 없음. WebM 추가 시 `js/config.js`의 `heroVideo.webm` 경로만 지정하면 된다.
+- **참고**: 12초 시네마틱 룩이지만 완전한 무결점 Seamless Loop는 아니다. 루프 경계에서 미세한 장면 차이가 보이면 영상 재생성 또는 크로스페이드 루프 처리를 검토한다.
 
 ## K-02. file:// 실행 시 localStorage가 Edge 일부 정책에서 비활성일 수 있음
 - **상태**: try/catch 처리로 기능 저하 없이 동작 (마지막 위치 복구·가이드 표시 상태만 세션 한정).

@@ -62,7 +62,7 @@ PC 전용(Desktop-Only) HTML 기반 인터랙티브 발표 슬라이드입니다
 - **제목·대학명·alt 텍스트**: `js/content.js` 에서 관리합니다.
 - **전환 효과**: `js/content.js` 의 `DECK_SEGMENT_TRANSITIONS` 에서 구간별로 변경합니다.
 
-## Hero 배경영상 추가
+## Hero 배경영상
 
 현재는 포스터 + Animated Gradient 폴백으로 동작합니다. 영상을 적용하려면:
 

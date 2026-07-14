@@ -34,6 +34,7 @@
 - [x] 자가 QA (1366×768 / 1920×1080 / 2560×1440 / 4K, 콘솔 에러 0건)
 
 ## 후속 (선택)
-- [ ] Hero 배경영상 생성·배치 (K-01)
+- [x] Hero 배경영상 생성·배치 (Kling v3.0 Pro, 12s 1080p MP4)
+- [ ] Hero 영상 WebM 변환본 추가 (선택 — MP4로 충분)
 - [ ] Pretendard 폰트 번들 (D-06)
 - [ ] GitHub Pages 배포 확인 (gojump0713.github.io/PPT_Native2)

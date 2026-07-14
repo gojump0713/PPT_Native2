@@ -15,10 +15,9 @@ PRD(ScrollDeck Pro v3.0)와 UI 기능명세서(v1.0) 사이의 해석·미기재
 - **결정**: ES Module 대신 `<script>` 순차 로드와 `window.Deck*` 네임스페이스를 사용한다.
 - **이유**: ES Module은 `file://` 프로토콜(더블클릭 실행)에서 CORS로 차단된다. "index.html을 브라우저로 열면 동작"하는 요구사항을 서버 없이 충족하기 위함이다.
 
-## D-04. Hero 배경영상은 기본 비활성(포스터+그라디언트 폴백으로 시작)
-- **결정**: `config.js`의 `heroVideo.enabled=false`가 기본값. 영상 파일 배치 후 플래그만 켜면 WebM→MP4→Poster 폴백 체인이 동작한다.
-- **이유**: 영상 에셋은 AI 생성이 필요한 외부 산출물로 아직 없다. 존재하지 않는 파일을 `<video>`에 연결하면 콘솔에 리소스 로드 에러가 남아 "Console Error 0건" 수용 기준을 위반한다. 명세 7.1이 "모든 영상 실패 시 Poster + Animated Gradient"를 공식 폴백으로 규정하므로 이를 기본 상태로 채택했다.
-- **영상 생성 프롬프트** (명세서 3.3): modern Korean university campuses + AI infrastructure, blue hour aerial fly-through, emerald green light streams, deep navy, no text/logo/faces, 16:9 4K seamless 12s loop.
+## D-04. Hero 배경영상 — Kling v3.0 Pro로 생성해 적용 (개정)
+- **결정**: 명세서 3.3 AI VIDEO PROMPT 기반으로 Higgsfield/Kling v3.0 Pro에서 12초 1080p 무음 MP4를 생성해 적용했다. `config.js`의 `heroVideo`는 존재하는 포맷만 지정하는 구조(null = 스킵)로, 없는 파일을 `<video>`에 연결해 콘솔 에러가 남는 것을 방지한다.
+- **이유**: 모델 선정은 비용·품질 균형 — Seedance 2.0 1080p 14초(126크레딧)는 잔액 초과, Kling 3.0 Pro 12초(21크레딧)로 동일 톤 확보. 포스터는 영상 첫 프레임을 캡처(`tools/poster.mjs`)해 포스터→영상 페이드인이 이어지게 했다. WebM 1순위 소스는 로컬 트랜스코더 부재로 생략(KNOWN_ISSUES K-01).
 
 ## D-05. 원본 PPT에서 1920×1080으로 슬라이드 재추출
 - **결정**: 제공된 `Source/구축사례/슬라이드N.PNG`(1280×720) 대신 PowerPoint COM 자동화로 `구축사례.pptx`에서 1920×1080 PNG를 재추출해 WebP(q92)로 변환했다.

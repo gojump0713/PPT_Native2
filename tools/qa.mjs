@@ -15,7 +15,7 @@ const pageErrors = [];
 const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
-  args: ['--no-sandbox', '--allow-file-access-from-files'],
+  args: ['--no-sandbox', '--allow-file-access-from-files', '--autoplay-policy=no-user-gesture-required'],
 });
 
 const page = await browser.newPage();

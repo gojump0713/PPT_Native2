@@ -3,11 +3,11 @@ window.DECK_CONFIG = {
   stageWidth: 1920,
   stageHeight: 1080,
 
-  // Hero 배경영상: 파일( assets/videos/ )을 추가한 뒤 true로 변경
-  // 파일이 없는 상태에서 true면 리소스 로드 에러가 콘솔에 남으므로 기본 false
+  // Hero 배경영상 — 존재하는 파일만 지정 (null이면 해당 포맷 스킵)
+  // 파일 없이 경로를 지정하면 콘솔에 리소스 로드 에러가 남는다
   heroVideo: {
-    enabled: false,
-    webm: './assets/videos/university-success-hero.webm',
+    enabled: true,
+    webm: null, // WebM 준비 시 './assets/videos/university-success-hero.webm'
     mp4: './assets/videos/university-success-hero.mp4'
   },
 

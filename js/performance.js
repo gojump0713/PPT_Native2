@@ -19,19 +19,23 @@
     video.setAttribute('playsinline', '');
     video.preload = 'auto';
 
-    var webm = document.createElement('source');
-    webm.src = CFG.heroVideo.webm;
-    webm.type = 'video/webm';
+    // 존재하는 포맷만 source로 추가 (WebM 우선 → MP4 폴백)
+    var sources = [];
+    if (CFG.heroVideo.webm) sources.push({ src: CFG.heroVideo.webm, type: 'video/webm' });
+    if (CFG.heroVideo.mp4) sources.push({ src: CFG.heroVideo.mp4, type: 'video/mp4' });
+    if (!sources.length) return;
 
-    var mp4 = document.createElement('source');
-    mp4.src = CFG.heroVideo.mp4;
-    mp4.type = 'video/mp4';
-
-    video.appendChild(webm);
-    video.appendChild(mp4);
+    var lastSource = null;
+    sources.forEach(function (s) {
+      var el = document.createElement('source');
+      el.src = s.src;
+      el.type = s.type;
+      video.appendChild(el);
+      lastSource = el;
+    });
 
     // 마지막 source까지 실패 → 영상 제거, 포스터 폴백 유지
-    mp4.addEventListener('error', function () {
+    lastSource.addEventListener('error', function () {
       if (video.parentNode) video.parentNode.removeChild(video);
       heroVideo = null;
     });
